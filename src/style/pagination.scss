@@ -1,0 +1,21 @@
+.pagination {
+    display: flex;
+    align-items: center;
+
+    &-buttonGroup {
+        border: 1px solid #dcdfe6;
+        border-radius: 3px;
+
+        button {
+            padding: 7px 18px;
+        }
+
+        button+button {
+            border-left: 1px solid #dcdfe6;
+        }
+    }
+
+    &-hint {
+        padding-left: 16px;
+    }
+}

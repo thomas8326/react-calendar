@@ -1,25 +1,21 @@
 import React from 'react';
-import './pagination.scss';
+import '../style/pagination.scss';
 
 const propTypes = {
 };
 
-class Pagination extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-  }
-
-  render() {
-    return (
-      <div className="pagination">
-        <button type="button">{'<'}</button>
-        <button type="button">{'>'}</button>
+function Pagination() {
+  return (
+    <div className="pagination">
+      <div className="pagination-buttonGroup">
+        <button type="button" className="pureButton fontSize-s">{'<'}</button>
+        <button type="button" className="pureButton fontSize-s">{'>'}</button>
       </div>
-    );
-  }
+      <div className="pagination-hint fontSize-l">
+        2020-06-13
+      </div>
+    </div>
+  );
 }
 
 Pagination.propTypes = propTypes;
