@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DayViewer from '../components/day-viewer';
 import '../style/calendar.scss';
+import { bindActionCreators } from 'redux';
+import fetchCalendar from '../fetch/fetchCalendar';
+import { getAvailableTimes, getBookedTimes } from '../redux/modules/calendar';
 
 const propTypes = {
 };
@@ -42,9 +45,16 @@ class Calendar extends React.Component {
     };
   }
 
+  UNSAFE_componentWillMount() {
+    const { fetchCalendar } = this.props;
+    fetchCalendar();
+  }
+
   render() {
     const { week } = this.state;
-    console.log(week);
+    const { availableTimes, bookedTimes } = this.props;
+    console.log(availableTimes);
+    console.log(bookedTimes);
 
     return (
       <div className="calendar">
@@ -54,12 +64,16 @@ class Calendar extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {};
-// };
-// const mapDispatchToProps = (dispatch) => {
-//   return {};
-// };
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    availableTimes: getAvailableTimes(state),
+    bookedTimes: getBookedTimes(state),
+  };
+};
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  fetchCalendar,
+}, dispatch);
 
 Calendar.propTypes = propTypes;
-export default connect()(Calendar);
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);
