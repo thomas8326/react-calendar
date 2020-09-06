@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DayViewer from '../components/day-viewer';
+import '../style/calendar.scss';
 
 const propTypes = {
 };
@@ -43,9 +44,12 @@ class Calendar extends React.Component {
 
   render() {
     const { week } = this.state;
+    console.log(week);
 
     return (
-      week.map((day) => <DayViewer key={day.key} dayOfWeek={day.value} date={day.date} />)
+      <div className="calendar">
+        {week.map((day) => <DayViewer key={day.key} dayOfWeek={day.value} date={day.date} />)}
+      </div>
     );
   }
 }
