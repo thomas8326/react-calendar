@@ -4,7 +4,7 @@ import DayViewer from '../components/day-viewer';
 import '../style/calendar.scss';
 import { bindActionCreators } from 'redux';
 import fetchCalendar from '../fetch/fetchCalendar';
-import { getAvailableTimes, getBookedTimes } from '../redux/modules/calendar';
+import { getAvailableTimes, getBookedTimes } from '../redux/modules/teacher-schedule';
 
 const propTypes = {
 };
@@ -12,6 +12,7 @@ const propTypes = {
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       week: [{
         key: 0,
@@ -45,6 +46,17 @@ class Calendar extends React.Component {
     };
   }
 
+  getCurrentWeek() {
+    const today = new Date();
+    const firstDayOfWeek = today.getDate() - today.getDay();
+    const lastDayOfWeek = firstDayOfWeek + 6;
+
+    return {
+      currentFirstDateOfWeek: new Date(today.setDate(firstDayOfWeek)).toISOString(),
+      currentLastDateOfWeek: new Date(today.setDate(lastDayOfWeek)).toISOString()
+    };
+  }
+
   UNSAFE_componentWillMount() {
     const { fetchCalendar } = this.props;
     fetchCalendar();
@@ -53,8 +65,7 @@ class Calendar extends React.Component {
   render() {
     const { week } = this.state;
     const { availableTimes, bookedTimes } = this.props;
-    console.log(availableTimes);
-    console.log(bookedTimes);
+    console.log(this.getCurrentWeek());
 
     return (
       <div className="calendar">

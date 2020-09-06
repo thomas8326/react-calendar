@@ -1,33 +1,38 @@
+import { FETCH_TEACHER_SCHEDULE } from "./teacher-schedule";
+
 // Constants
-export const FETCH_TEACHER_CALENDAR = 'FETCH_TEACHER_CALENDAR';
+export const FETCH_CURRENT_WEEK = 'FETCH_CURRENT_WEEK';
+export const GO_NEXT_WEEK = 'GO_NEXT_WEEK';
+export const GO_LAST_WEEK = 'GO_LAST_WEEK';
+
+
+// export const constants = { };
 
 // Action Creators
-export function fetchTeacherCalendar({ availableTimes, bookedTimes }) {
+
+export function fetchCurrentWeek({ weekStartDate, WeekEndDate }) {
   return {
-    type: FETCH_TEACHER_CALENDAR,
-    availableTimes,
-    bookedTimes
+    type: FETCH_CURRENT_WEEK,
+    weekStartDate,
+    WeekEndDate
   };
 }
 
 // Reducer
 export const defaultState = {
-  availableTimes: [],
-  bookedTimes: [],
+  weekStartDate: Date,
+  weekEndDate: Date,
 };
 
-export default function teacherCalendarReducer(state = defaultState, action) {
+export default function calendarReducer(state = defaultState, action) {
   switch (action.type) {
-    case FETCH_TEACHER_CALENDAR:
+    case FETCH_TEACHER_SCHEDULE:
       return {
         ...state,
-        availableTimes: action.availableTimes,
-        bookedTimes: action.bookedTimes,
-      };
+        weekStartDate: action.weekStartDate,
+        weekEndDate: action.WeekEndDate,
+      }
     default:
       return state;
   }
 }
-
-export const getAvailableTimes = state => state.calendar.availableTimes;
-export const getBookedTimes = state => state.calendar.bookedTimes;

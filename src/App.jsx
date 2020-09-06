@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import Calendar from './containers/calendar';
+import Calendar from './containers/calendar-board';
 import CalendarHeader from './containers/calendar-header';
 
 function App() {

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import teacherCalendarReducer from '../redux/modules/calendar';
+import teacherScheduleReducer from '../redux/modules/teacher-schedule';
+import calendarReducer from '../redux/modules/calendar';
 
 const storage = combineReducers({
-  calendar: teacherCalendarReducer
+  teacherSchedule: teacherScheduleReducer,
+  calendar: calendarReducer,
 });
 
 export default storage;
