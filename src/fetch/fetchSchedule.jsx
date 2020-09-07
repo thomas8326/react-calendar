@@ -1,7 +1,7 @@
 import { fetchTeacherSchedule } from '../redux/modules/teacher-schedule';
 import data from '../mock/calendar-mock.json';
 
-export default function fetchCalendar() {
+export default function fetchSchedule() {
   return (dispatch) => {
     dispatch(fetchTeacherSchedule({
       availableTimes: data.available,

@@ -3,6 +3,17 @@ export const FETCH_TEACHER_SCHEDULE = 'FETCH_TEACHER_SCHEDULE';
 
 // Action Creators
 export function fetchTeacherSchedule({ availableTimes, bookedTimes }) {
+  const timeConverter = (times) => {
+    times.map((start, end) => {
+      return {
+        start: {
+
+        }
+      }
+    })
+  }
+
+
   return {
     type: FETCH_TEACHER_SCHEDULE,
     availableTimes,
@@ -29,6 +40,6 @@ export default function teacherScheduleReducer(state = defaultState, action) {
   }
 }
 
-export const getAvailableTimes = state => state.calendar.availableTimes;
-export const getBookedTimes = state => state.calendar.bookedTimes;
+export const getAvailableTimes = state => state.teacherSchedule.availableTimes;
+export const getBookedTimes = state => state.teacherSchedule.bookedTimes;
 
