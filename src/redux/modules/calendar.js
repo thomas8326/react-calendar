@@ -1,3 +1,5 @@
+import { MyDate } from '../../utils/date';
+
 // Constants
 export const FETCH_CURRENT_WEEK = 'FETCH_CURRENT_WEEK';
 export const GO_NEXT_WEEK = 'GO_NEXT_WEEK';
@@ -22,12 +24,13 @@ export function fetchCurrentWeek() {
     const firstDayOfWeek = today.getDate() - today.getDay();
     const lastDayOfWeek = firstDayOfWeek + 6;
     const week = new Array(lastDayOfWeek - firstDayOfWeek + 1).fill().map((_, index) => {
-      const date = new Date(today.setDate(firstDayOfWeek + index));
+      const myDate = new MyDate(new Date(today.setDate(firstDayOfWeek + index)));
+
       return {
-        key: index,
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        date: date.getDate(),
+        key: myDate.getKey(),
+        year: myDate.getYear(),
+        month: myDate.getMonth(),
+        date: myDate.getDate(),
         dayOfWeek: WEEK_FORMAT_MAP.get(index),
       }
     });

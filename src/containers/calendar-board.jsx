@@ -22,15 +22,21 @@ class Calendar extends React.Component {
   UNSAFE_componentWillMount() {
   }
 
-  getAWeekDate({ weekStartDate, weekEndDate }) {
-  }
-
   render() {
     const { availableTimes, bookedTimes, weekStartDate, weekEndDate, week } = this.props;
+    console.log(availableTimes);
 
     return (
       <div className="calendar">
-        {week.map((day) => <DayViewer key={day.key} dayOfWeek={day.dayOfWeek} date={day.date} />)}
+        {week.map((day) =>
+          <DayViewer
+            key={day.key}
+            dayOfWeek={day.dayOfWeek}
+            date={day.date}
+            availableTimes={availableTimes.filter(time => time.start.key === day.key)}
+            bookedTimes={bookedTimes.filter(time => time.start.key === day.key)}
+          />
+        )}
       </div>
     );
   }
