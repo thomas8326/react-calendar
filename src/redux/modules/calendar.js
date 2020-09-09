@@ -31,7 +31,6 @@ export function goLastWeek() {
   return (dispatch, getState) => {
     const myDate = new MyDate();
     const { weekStartDate, lastMonth, lastYear } = getState().calendar;
-    console.log(getState().calendar);
     const lastWeek = myDate.getCurrentWeek(new MyDate(lastYear, lastMonth, weekStartDate - 7));
     return dispatch({
       type: GO_LAST_WEEK,
@@ -39,6 +38,8 @@ export function goLastWeek() {
       weekEndDate: lastWeek.weekEndDate,
       lastMonth: lastWeek.lastMonth,
       lastYear: lastWeek.lastYear,
+      nextMonth: lastWeek.nextMonth,
+      nextYear: lastWeek.nextYear,
       week: lastWeek.week
     })
   };
@@ -48,7 +49,6 @@ export function goNextWeek() {
   return (dispatch, getState) => {
     const myDate = new MyDate();
     const { weekEndDate, nextMonth, nextYear } = getState().calendar;
-    console.log(getState().calendar);
 
     const nextWeek = myDate.getCurrentWeek(new MyDate(nextYear, nextMonth, weekEndDate + 1));
 
@@ -56,6 +56,8 @@ export function goNextWeek() {
       type: GO_NEXT_WEEK,
       weekStartDate: nextWeek.weekStartDate,
       weekEndDate: nextWeek.weekEndDate,
+      lastMonth: nextWeek.lastMonth,
+      lastYear: nextWeek.lastYear,
       nextMonth: nextWeek.nextMonth,
       nextYear: nextWeek.nextYear,
       week: nextWeek.week
@@ -77,25 +79,7 @@ export const defaultState = {
 export default function calendarReducer(state = defaultState, action) {
   switch (action.type) {
     case FETCH_CURRENT_WEEK:
-      return {
-        ...state,
-        weekStartDate: action.weekStartDate,
-        weekEndDate: action.weekEndDate,
-        lastYear: action.lastYear,
-        lastMonth: action.lastMonth,
-        nextMonth: action.nextMonth,
-        nextYear: action.nextYear,
-        week: action.week
-      }
     case GO_NEXT_WEEK:
-      return {
-        ...state,
-        weekStartDate: action.weekStartDate,
-        weekEndDate: action.weekEndDate,
-        nextMonth: action.nextMonth,
-        nextYear: action.nextYear,
-        week: action.week
-      }
     case GO_LAST_WEEK:
       return {
         ...state,
@@ -103,6 +87,8 @@ export default function calendarReducer(state = defaultState, action) {
         weekEndDate: action.weekEndDate,
         lastYear: action.lastYear,
         lastMonth: action.lastMonth,
+        nextMonth: action.nextMonth,
+        nextYear: action.nextYear,
         week: action.week
       }
     default:

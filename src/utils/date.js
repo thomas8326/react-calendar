@@ -40,7 +40,6 @@ export class MyDate extends Date {
 
   getCurrentWeek(newMyDate) {
     const myDate = newMyDate || new MyDate();
-    console.log(myDate);
     const firstDayOfWeek = myDate.getDate() - myDate.getDay();
     const lastDayOfWeek = firstDayOfWeek + 6;
 
