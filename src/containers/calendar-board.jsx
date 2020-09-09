@@ -24,8 +24,6 @@ class Calendar extends React.Component {
 
   render() {
     const { availableTimes, bookedTimes, weekStartDate, weekEndDate, week } = this.props;
-    console.log(availableTimes);
-
     return (
       <div className="calendar">
         {week.map((day) =>

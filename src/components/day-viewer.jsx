@@ -42,16 +42,12 @@ class DayViewer extends React.Component {
       current = newCurrent;
     }
 
-    console.log(result);
-    console.log([...result]);
-
     return result;
   }
 
   render() {
     const { dayOfWeek, date } = this.props;
     const { dayTimes } = this.state;
-    console.log(dayTimes);
     return (
       <div className="dayContainer">
         <div className="dayOfWeek textCenter fontSize-l">{dayOfWeek}</div>

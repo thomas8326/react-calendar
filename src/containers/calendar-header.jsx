@@ -2,30 +2,50 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Pagination from '../components/pagination';
 import Hint from '../components/hint';
+import { bindActionCreators } from 'redux';
+import { goNextWeek, goLastWeek, getCurrentWeek } from '../redux/modules/calendar';
 
 import '../style/calendarHeader.scss';
 
 const propTypes = {
 };
 
-function CalendarHeader() {
-  return (
-    <div className="calendarHeader">
-      <Pagination />
-      <Hint />
-    </div>
-  );
+class CalendarHeader extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  getCurrentWeekRange(week) {
+    if (!!week.length) {
+      return `${week[0].key} - ${week[week.length - 1].date}`
+    }
+    return 'Oops, that seems occur an error.'
+  }
+
+  render() {
+    const { goLastWeek, goNextWeek, week } = this.props;
+    return (
+      <div className="calendarHeader">
+        <Pagination goLast={() => goLastWeek()} goNext={() => goNextWeek()} weekRange={this.getCurrentWeekRange(week)} />
+        <Hint />
+      </div>
+    )
+  }
 }
 
-// const mapStateToProps = (state) => {
-//   return {};
-// };
-// const mapDispatchToProps = (dispatch) => {
-//   return {};
-// };
+const mapStateToProps = (state) => {
+  return {
+    week: getCurrentWeek(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+  goNextWeek,
+  goLastWeek,
+}, dispatch, ownProps);
 
 CalendarHeader.propTypes = propTypes;
 export default connect(
-  // mapStateToProps,
-  // mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(CalendarHeader);

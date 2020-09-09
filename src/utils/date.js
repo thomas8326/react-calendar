@@ -1,5 +1,5 @@
 export class MyDate extends Date {
-  current = new Date();
+  oneDaySecond = 1000 * 60 * 60 * 24
   dayOfWeekMap = new Map([
     [0, 'Sun'],
     [1, 'Mon'],
@@ -10,24 +10,20 @@ export class MyDate extends Date {
     [6, 'Sat'],
   ]);
 
-  constructor(myDate) {
-    super();
-    if (myDate) {
-      this.current = new Date(myDate);
-      console.log('In');
-    }
-  }
-
   getYear() {
-    return this.current.getFullYear();
+    return super.getFullYear();
   }
 
   getMonth() {
-    return this.current.getMonth() + 1;
+    return super.getMonth() + 1;
+  }
+
+  getDateOfNumber() {
+    return super.getDate();
   }
 
   getDate() {
-    return this.current.getDate() < 10 ? '0' + this.current.getDate() : this.current.getDate();
+    return super.getDate() < 10 ? '0' + super.getDate() : super.getDate().toString();
   }
 
   getKey() {
@@ -35,31 +31,42 @@ export class MyDate extends Date {
   }
 
   getHours() {
-    return this.current.getHours();
+    return super.getHours();
   }
 
   getMinutes() {
-    return this.current.getMinutes();
+    return super.getMinutes();
   }
 
-  getCurrentWeek() {
-    const firstDayOfWeek = this.current.getDate() - this.current.getDay();
+  getCurrentWeek(newMyDate) {
+    const myDate = newMyDate || new MyDate();
+    console.log(myDate);
+    const firstDayOfWeek = myDate.getDate() - myDate.getDay();
     const lastDayOfWeek = firstDayOfWeek + 6;
 
     const week = new Array(lastDayOfWeek - firstDayOfWeek + 1).fill().map((_, index) => {
-      const myDate = new MyDate(this.current.setDate(firstDayOfWeek + index));
+      const tempDate = new MyDate(myDate);
+      tempDate.setDate(firstDayOfWeek + index);
       return {
-        key: myDate.getKey(),
-        year: myDate.getYear(),
-        month: myDate.getMonth(),
-        date: myDate.getDate(),
+        key: tempDate.getKey(),
+        year: tempDate.getYear(),
+        month: tempDate.getMonth(),
+        date: tempDate.getDate(),
+        dateOfNumber: tempDate.getDateOfNumber(),
         dayOfWeek: this.dayOfWeekMap.get(index),
       }
     });
 
+    const firstDate = week[0];
+    const endDate = week[week.length - 1];
+
     return {
-      weekStartDate: new MyDate(this.current.setDate(firstDayOfWeek)).getTime(),
-      weekEndDate: new MyDate(this.current.setDate(lastDayOfWeek)).getTime(),
+      weekStartDate: firstDate.dateOfNumber,
+      lastYear: firstDate.year,
+      lastMonth: firstDate.month - 1,
+      weekEndDate: endDate.dateOfNumber,
+      nextMonth: endDate.month - 1,
+      nextYear: endDate.year,
       week: week
     };
   }

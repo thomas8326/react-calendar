@@ -7,8 +7,8 @@ export const FETCH_TEACHER_SCHEDULE = 'FETCH_TEACHER_SCHEDULE';
 export function fetchTeacherSchedule({ availableTimes, bookedTimes }) {
   const timeConverter = (times) => {
     return times.map(({ start, end }) => {
-      const startTime = new MyDate(new Date(start));
-      const endTime = new MyDate(new Date(end));
+      const startTime = new MyDate(start);
+      const endTime = new MyDate(end);
 
       return {
         start: {
