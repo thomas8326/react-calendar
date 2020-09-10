@@ -1,8 +1,8 @@
 import { MyDate } from '../../utils/date';
-import store from '../../reducers/index';
 
 // Constants
 export const FETCH_CURRENT_WEEK = 'FETCH_CURRENT_WEEK';
+export const FETCH_WEEK = 'FETCH_WEEK';
 export const GO_NEXT_WEEK = 'GO_NEXT_WEEK';
 export const GO_LAST_WEEK = 'GO_LAST_WEEK';
 
@@ -11,36 +11,24 @@ export const GO_LAST_WEEK = 'GO_LAST_WEEK';
 
 // Action Creators
 
-
-export function fetchCurrentWeek() {
-  const currentWeek = new MyDate().getCurrentWeek();
-  console.log(currentWeek);
+export function fetchWeek() {
+  const current = new MyDate();
   return {
-    type: FETCH_CURRENT_WEEK,
-    weekStartDate: currentWeek.weekStartDate,
-    weekEndDate: currentWeek.weekEndDate,
-    lastYear: currentWeek.lastYear,
-    lastMonth: currentWeek.lastMonth,
-    nextMonth: currentWeek.nextMonth,
-    nextYear: currentWeek.nextYear,
-    week: currentWeek.week
-  };
+    type: FETCH_WEEK,
+    today: current.getFullDate(),
+    week: current.getWeek(),
+  }
 }
 
 export function goLastWeek() {
   return (dispatch, getState) => {
     const myDate = new MyDate();
-    const { weekStartDate, lastMonth, lastYear } = getState().calendar;
-    const lastWeek = myDate.getCurrentWeek(new MyDate(lastYear, lastMonth, weekStartDate - 7));
+    const { week } = getState().calendar;
+    const startDateOfWeek = week[0].fullDate;
+    const lastWeek = myDate.getWeek(new MyDate(startDateOfWeek.year, startDateOfWeek.month - 1, startDateOfWeek.date - 7));
     return dispatch({
       type: GO_LAST_WEEK,
-      weekStartDate: lastWeek.weekStartDate,
-      weekEndDate: lastWeek.weekEndDate,
-      lastMonth: lastWeek.lastMonth,
-      lastYear: lastWeek.lastYear,
-      nextMonth: lastWeek.nextMonth,
-      nextYear: lastWeek.nextYear,
-      week: lastWeek.week
+      week: lastWeek
     })
   };
 }
@@ -48,54 +36,39 @@ export function goLastWeek() {
 export function goNextWeek() {
   return (dispatch, getState) => {
     const myDate = new MyDate();
-    const { weekEndDate, nextMonth, nextYear } = getState().calendar;
-
-    const nextWeek = myDate.getCurrentWeek(new MyDate(nextYear, nextMonth, weekEndDate + 1));
-
+    const { week } = getState().calendar;
+    const endDateOfWeek = week[week.length - 1].fullDate;
+    const nextWeek = myDate.getWeek(new MyDate(endDateOfWeek.year, endDateOfWeek.month - 1, endDateOfWeek.date + 1));
     return dispatch({
       type: GO_NEXT_WEEK,
-      weekStartDate: nextWeek.weekStartDate,
-      weekEndDate: nextWeek.weekEndDate,
-      lastMonth: nextWeek.lastMonth,
-      lastYear: nextWeek.lastYear,
-      nextMonth: nextWeek.nextMonth,
-      nextYear: nextWeek.nextYear,
-      week: nextWeek.week
+      week: nextWeek
     })
   };
 }
 
 // Reducer
 export const defaultState = {
-  weekStartDate: Date,
-  weekEndDate: Date,
-  lastYear: 0,
-  lastMonth: 0,
-  nextMonth: 0,
-  nextYear: 0,
-  week: []
+  today: Date,
+  week: [],
 };
 
 export default function calendarReducer(state = defaultState, action) {
   switch (action.type) {
-    case FETCH_CURRENT_WEEK:
+    case FETCH_WEEK:
+      return {
+        ...state,
+        today: action.today,
+        week: action.week,
+      }
     case GO_NEXT_WEEK:
     case GO_LAST_WEEK:
       return {
         ...state,
-        weekStartDate: action.weekStartDate,
-        weekEndDate: action.weekEndDate,
-        lastYear: action.lastYear,
-        lastMonth: action.lastMonth,
-        nextMonth: action.nextMonth,
-        nextYear: action.nextYear,
         week: action.week
       }
     default:
       return state;
   }
 }
+export const getWeek = state => state.calendar.week;
 
-export const getWeekStartDate = state => state.calendar.weekStartDate;
-export const getWeekEndDate = state => state.calendar.weekEndDate;
-export const getCurrentWeek = state => state.calendar.week;

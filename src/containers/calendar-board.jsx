@@ -4,7 +4,7 @@ import DayViewer from '../components/day-viewer';
 import '../style/calendar.scss';
 import { bindActionCreators } from 'redux';
 import fetchSchedule from '../fetch/fetchSchedule';
-import { fetchCurrentWeek, getWeekStartDate, getWeekEndDate, getCurrentWeek } from '../redux/modules/calendar';
+import { fetchWeek, getWeek } from '../redux/modules/calendar';
 import { getAvailableTimes, getBookedTimes } from '../redux/modules/teacher-schedule';
 
 const propTypes = {
@@ -14,25 +14,27 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
 
-    const { fetchTeacherSchedule, fetchCurrentWeek } = this.props;
+    const { fetchTeacherSchedule, fetchWeek } = this.props;
     fetchTeacherSchedule();
-    fetchCurrentWeek();
+    fetchWeek();
   }
 
   UNSAFE_componentWillMount() {
   }
 
   render() {
-    const { availableTimes, bookedTimes, weekStartDate, weekEndDate, week } = this.props;
+    const { week } = this.props;
     return (
       <div className="calendar">
         {week.map((day) =>
           <DayViewer
-            key={day.key}
-            dayOfWeek={day.dayOfWeek}
-            date={day.date}
-            availableTimes={availableTimes.filter(time => time.start.key === day.key)}
-            bookedTimes={bookedTimes.filter(time => time.start.key === day.key)}
+            key={day.fullDate.key}
+            dayOfWeek={day.fullDate.dayOfWeek}
+            date={day.fullDate.date}
+            availableTimes={[]}
+            bookedTimes={[]}
+          // availableTimes={availableTimes.filter(time => time.start.key === day.key)}
+          // bookedTimes={bookedTimes.filter(time => time.start.key === day.key)}
           />
         )}
       </div>
@@ -42,16 +44,14 @@ class Calendar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    week: getCurrentWeek(state),
-    weekStartDate: getWeekStartDate(state),
-    weekEndDate: getWeekEndDate(state),
+    week: getWeek(state),
     availableTimes: getAvailableTimes(state),
     bookedTimes: getBookedTimes(state),
   };
 };
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchTeacherSchedule: fetchSchedule,
-  fetchCurrentWeek,
+  fetchWeek,
 }, dispatch);
 
 Calendar.propTypes = propTypes;

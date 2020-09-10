@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Pagination from '../components/pagination';
 import Hint from '../components/hint';
 import { bindActionCreators } from 'redux';
-import { goNextWeek, goLastWeek, getCurrentWeek } from '../redux/modules/calendar';
+import { goNextWeek, goLastWeek, getWeek } from '../redux/modules/calendar';
 
 import '../style/calendarHeader.scss';
 
@@ -26,7 +26,7 @@ class CalendarHeader extends React.Component {
     const { goLastWeek, goNextWeek, week } = this.props;
     return (
       <div className="calendarHeader">
-        <Pagination className="pagination" goLast={() => goLastWeek()} goNext={() => goNextWeek()} weekRange={this.getCurrentWeekRange(week)} />
+        <Pagination className="pagination" goLast={() => goLastWeek()} goNext={() => goNextWeek()} />
         <Hint className="hint" />
       </div>
     )
@@ -35,7 +35,7 @@ class CalendarHeader extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    week: getCurrentWeek(state),
+    week: getWeek(state),
   };
 };
 
