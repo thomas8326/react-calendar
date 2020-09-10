@@ -1,17 +1,18 @@
+@import 'src/style/utils/mixin.scss';
+
 .calendar {
-  display: flex;
-  flex-direction: row;
+  @include flex(row);
   justify-content: space-between;
+
+  padding: 15px 0;
 }
 
 .dayContainer {
+  @include flex();
   flex: 1;
-  margin: 0 4px;
+  margin: 0 5px;
 
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
-  flex-direction: column;
   border-top: 4px solid var(--primary-color);
 
   &-time_disable {
@@ -21,5 +22,21 @@
   &-time_available {
     color: var(--primary-available-color);
     font-weight: bold;
+  }
+}
+
+.dateBoard {
+  @include flex();
+  width: 100%;
+  margin: 10px 0;
+}
+
+.timeBoard {
+  width: 100%;
+
+  .time {
+    @include flex();
+    align-items: center;
+    padding: 4px 0;
   }
 }

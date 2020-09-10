@@ -50,10 +50,12 @@ class DayViewer extends React.Component {
     const { dayTimes } = this.state;
     return (
       <div className="dayContainer">
-        <div className="dayOfWeek textCenter fontSize-l">{dayOfWeek}</div>
-        <div className="date textCenter fontSize-l">{date}</div>
-        <ul className="time fontSize-s">
-          {dayTimes.map((time, index) => (<li key={index} className={time.className}>{time.text}</li>))}
+        <div className="dateBoard">
+          <div className="dayOfWeek textCenter fontSize-l">{dayOfWeek}</div>
+          <div className="date textCenter fontSize-l">{date}</div>
+        </div>
+        <ul className="timeBoard fontSize-s">
+          {dayTimes.map((time, index) => (<li key={index} className={time.className + " time"}>{time.text}</li>))}
         </ul>
       </div>
     );
