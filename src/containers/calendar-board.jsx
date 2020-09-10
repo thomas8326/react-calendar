@@ -23,7 +23,8 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { week } = this.props;
+    const { availableTimes, bookedTimes, week } = this.props;
+
     return (
       <div className="calendar">
         {week.map((day) =>
@@ -33,8 +34,8 @@ class Calendar extends React.Component {
             date={day.fullDate.date}
             availableTimes={[]}
             bookedTimes={[]}
-          // availableTimes={availableTimes.filter(time => time.start.key === day.key)}
-          // bookedTimes={bookedTimes.filter(time => time.start.key === day.key)}
+            availableTimes={availableTimes.filter(time => time.start.fullDate.key === day.fullDate.key)}
+            bookedTimes={bookedTimes.filter(time => time.start.fullDate.key === day.fullDate.key)}
           />
         )}
       </div>

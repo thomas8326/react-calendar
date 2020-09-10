@@ -13,6 +13,7 @@ class DayViewer extends React.Component {
     super(props);
 
     const { availableTimes, bookedTimes } = this.props;
+
     const todayAvailableTimes = availableTimes.flatMap(availableTime => this.getTime(availableTime, 'dayContainer-time_available'));
     const todayBookedTimes = bookedTimes.flatMap(bookedTimes => this.getTime(bookedTimes, 'dayContainer-time_disable'));
 
@@ -28,9 +29,9 @@ class DayViewer extends React.Component {
   }
 
   getTime({ start, end }, className) {
-    let current = start;
-    const last = end;
-    const result = [{ text: this.dayTimeConverter(start), className: className, value: start.clock * 100 + start.minute }];
+    let current = start.time;
+    const last = end.time;
+    const result = [{ text: this.dayTimeConverter(start.time), className: className, value: start.clock * 100 + start.minute }];
 
     while (current.clock < last.clock) {
       const newCurrent = current.minute + HALF_OF_HOUR >= ONE_HOUR ? { clock: current.clock + 1, minute: 0 } : { clock: current.clock, minute: current.minute + HALF_OF_HOUR };

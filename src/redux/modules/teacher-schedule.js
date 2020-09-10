@@ -12,20 +12,18 @@ export function fetchTeacherSchedule({ availableTimes, bookedTimes }) {
 
       return {
         start: {
-          key: startTime.getKey(),
-          year: startTime.getYear(),
-          month: startTime.getMonth(),
-          date: startTime.getDate(),
-          clock: startTime.getHours(),
-          minute: startTime.getMinutes(),
+          fullDate: startTime.getFullDate(),
+          time: {
+            clock: startTime.getHours(),
+            minute: startTime.getMinutes(),
+          }
         },
         end: {
-          key: endTime.getKey(),
-          year: endTime.getYear(),
-          month: endTime.getMonth(),
-          date: endTime.getDate(),
-          clock: endTime.getHours(),
-          minute: endTime.getMinutes(),
+          fullDate: endTime.getFullDate(),
+          time: {
+            clock: endTime.getHours(),
+            minute: endTime.getMinutes(),
+          }
         },
       }
     })
