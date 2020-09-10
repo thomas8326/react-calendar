@@ -17,7 +17,7 @@ class CalendarHeader extends React.Component {
 
   getCurrentWeekRange(week) {
     if (!!week.length) {
-      return `${week[0].key} - ${week[week.length - 1].date}`
+      return `${week[0].fullDate.key} - ${week[week.length - 1].fullDate.date}`
     }
     return 'Oops, that seems occur an error.'
   }
@@ -26,7 +26,7 @@ class CalendarHeader extends React.Component {
     const { goLastWeek, goNextWeek, week } = this.props;
     return (
       <div className="calendarHeader">
-        <Pagination className="pagination" goLast={() => goLastWeek()} goNext={() => goNextWeek()} />
+        <Pagination className="pagination" goLast={() => goLastWeek()} goNext={() => goNextWeek()} weekRange={this.getCurrentWeekRange(week)} />
         <Hint className="hint" />
       </div>
     )
