@@ -1,6 +1,16 @@
-.calendarHeader {
-    display: flex;
-    justify-content: space-between;
+@import 'src/style/utils/mixin.scss';
 
-    align-items: center;
+.calendarHeader {
+  @include flex(row);
+
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hint {
+  margin: auto 0 auto auto;
+
+  .timezone {
+    text-align: right;
+  }
 }

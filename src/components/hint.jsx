@@ -9,9 +9,9 @@ function Hint() {
       <span>
         * All the timings listed are in your timezone:
       </span>
-      <span>
+      <div class="timezone">
         Taipei (GMT+08:00)
-      </span>
+      </div>
     </div>
   );
 }

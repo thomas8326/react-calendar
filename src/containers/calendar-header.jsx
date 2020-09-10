@@ -26,8 +26,8 @@ class CalendarHeader extends React.Component {
     const { goLastWeek, goNextWeek, week } = this.props;
     return (
       <div className="calendarHeader">
-        <Pagination goLast={() => goLastWeek()} goNext={() => goNextWeek()} weekRange={this.getCurrentWeekRange(week)} />
-        <Hint />
+        <Pagination className="pagination" goLast={() => goLastWeek()} goNext={() => goNextWeek()} weekRange={this.getCurrentWeekRange(week)} />
+        <Hint className="hint" />
       </div>
     )
   }
