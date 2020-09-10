@@ -4,7 +4,7 @@ import DayViewer from '../components/day-viewer';
 import '../style/calendar.scss';
 import { bindActionCreators } from 'redux';
 import fetchSchedule from '../fetch/fetchSchedule';
-import { fetchWeek, getWeek } from '../redux/modules/calendar';
+import { fetchWeek, getWeek, getToday } from '../redux/modules/calendar';
 import { getAvailableTimes, getBookedTimes } from '../redux/modules/teacher-schedule';
 
 const propTypes = {
@@ -23,17 +23,18 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { availableTimes, bookedTimes, week } = this.props;
+    const { availableTimes, bookedTimes, week, today } = this.props;
+    console.log(week);
 
     return (
       <div className="calendar">
         {week.map((day) =>
           <DayViewer
             key={day.fullDate.key}
-            dayOfWeek={day.fullDate.dayOfWeek}
+            dayOfWeek={day.dayOfWeek}
             date={day.fullDate.date}
-            availableTimes={[]}
-            bookedTimes={[]}
+            dateKey={day.fullDate.key}
+            todayKey={today.key}
             availableTimes={availableTimes.filter(time => time.start.fullDate.key === day.fullDate.key)}
             bookedTimes={bookedTimes.filter(time => time.start.fullDate.key === day.fullDate.key)}
           />
@@ -45,6 +46,7 @@ class Calendar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    today: getToday(state),
     week: getWeek(state),
     availableTimes: getAvailableTimes(state),
     bookedTimes: getBookedTimes(state),

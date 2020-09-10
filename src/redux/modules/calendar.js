@@ -25,7 +25,7 @@ export function goLastWeek() {
     const myDate = new MyDate();
     const { week } = getState().calendar;
     const startDateOfWeek = week[0].fullDate;
-    const lastWeek = myDate.getWeek(new MyDate(startDateOfWeek.year, startDateOfWeek.month - 1, startDateOfWeek.date - 7));
+    const lastWeek = myDate.getWeek(new MyDate(startDateOfWeek.year, startDateOfWeek.month, startDateOfWeek.date - 7));
     return dispatch({
       type: GO_LAST_WEEK,
       week: lastWeek
@@ -38,7 +38,7 @@ export function goNextWeek() {
     const myDate = new MyDate();
     const { week } = getState().calendar;
     const endDateOfWeek = week[week.length - 1].fullDate;
-    const nextWeek = myDate.getWeek(new MyDate(endDateOfWeek.year, endDateOfWeek.month - 1, endDateOfWeek.date + 1));
+    const nextWeek = myDate.getWeek(new MyDate(endDateOfWeek.year, endDateOfWeek.month, endDateOfWeek.date + 1));
     return dispatch({
       type: GO_NEXT_WEEK,
       week: nextWeek
@@ -54,7 +54,9 @@ export const defaultState = {
 
 export default function calendarReducer(state = defaultState, action) {
   switch (action.type) {
+
     case FETCH_WEEK:
+      console.log(action);
       return {
         ...state,
         today: action.today,
@@ -70,5 +72,6 @@ export default function calendarReducer(state = defaultState, action) {
       return state;
   }
 }
+export const getToday = state => state.calendar.today;
 export const getWeek = state => state.calendar.week;
 

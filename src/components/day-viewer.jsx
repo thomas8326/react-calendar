@@ -1,5 +1,6 @@
 import React from 'react';
 import '../style/calendar.scss';
+import { classNames } from '../utils/classNames';
 
 const HALF_OF_HOUR = 30;
 const ONE_HOUR = 60;
@@ -12,13 +13,15 @@ class DayViewer extends React.Component {
   constructor(props) {
     super(props);
 
-    const { availableTimes, bookedTimes } = this.props;
+    const { availableTimes, bookedTimes, dateKey, todayKey } = this.props;
 
     const todayAvailableTimes = availableTimes.flatMap(availableTime => this.getTime(availableTime, 'dayContainer-time_available'));
     const todayBookedTimes = bookedTimes.flatMap(bookedTimes => this.getTime(bookedTimes, 'dayContainer-time_disable'));
 
     this.state = {
-      dayTimes: todayAvailableTimes.concat(todayBookedTimes).sort((prev, curr) => prev.value - curr.value)
+      dayTimes: todayAvailableTimes.concat(todayBookedTimes).sort((prev, curr) => prev.value - curr.value),
+      dateKey,
+      todayKey
     }
   }
 
@@ -46,18 +49,38 @@ class DayViewer extends React.Component {
     return result;
   }
 
+  renderTeacherSchedule() {
+    const { dayTimes, dateKey, todayKey } = this.state;
+
+    if (dateKey < todayKey) {
+      return;
+    }
+
+    return (
+      <ul className="timeBoard fontSize-s">
+        {dayTimes.map((time, index) => (<li key={index} className={time.className + " time"}>{time.text}</li>))}
+      </ul>
+    )
+  }
+
+  renderClassName() {
+    const { dateKey, todayKey } = this.state;
+
+    return classNames('dayContainer', { dayViewer_disable: dateKey < todayKey });
+  }
+
   render() {
     const { dayOfWeek, date } = this.props;
-    const { dayTimes } = this.state;
+
     return (
-      <div className="dayContainer">
+      <div className="dayContainer" className={this.renderClassName()}>
         <div className="dateBoard">
           <div className="dayOfWeek textCenter fontSize-l">{dayOfWeek}</div>
           <div className="date textCenter fontSize-l">{date}</div>
         </div>
-        <ul className="timeBoard fontSize-s">
-          {dayTimes.map((time, index) => (<li key={index} className={time.className + " time"}>{time.text}</li>))}
-        </ul>
+        {
+          this.renderTeacherSchedule()
+        }
       </div>
     );
   }

@@ -25,6 +25,14 @@
   }
 }
 
+.dayViewer_disable {
+  border-color: var(--primary-disable-color);
+
+  * {
+    color: var(--primary-disable-color);
+  }
+}
+
 .dateBoard {
   @include flex();
   width: 100%;
