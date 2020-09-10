@@ -18,12 +18,12 @@ export class MyDate extends Date {
     return super.getMonth() + 1;
   }
 
-  getDateOfNumber() {
-    return super.getDate();
+  getStringDate() {
+    return super.getDate() < 10 ? '0' + super.getDate() : super.getDate().toString();;
   }
 
   getDate() {
-    return super.getDate() < 10 ? '0' + super.getDate() : super.getDate().toString();
+    return super.getDate();
   }
 
   getKey() {
@@ -36,6 +36,33 @@ export class MyDate extends Date {
 
   getMinutes() {
     return super.getMinutes();
+  }
+
+  getFullDate() {
+    return {
+      key: this.getKey(),
+      year: this.getYear(),
+      month: this.getMonth(),
+      date: this.getDate(),
+      stringDate: this.getStringDate(),
+    }
+  }
+
+  getWeek(newMyDate) {
+    const myDate = newMyDate || new MyDate();
+    const firstDayOfWeek = myDate.getDate() - myDate.getDay();
+    const lastDayOfWeek = firstDayOfWeek + 6;
+
+    const week = new Array(lastDayOfWeek - firstDayOfWeek + 1).fill().map((_, index) => {
+      const tempDate = new MyDate(myDate);
+      tempDate.setDate(firstDayOfWeek + index);
+      return {
+        fullDate: tempDate.getFullDate(),
+        dayOfWeek: this.dayOfWeekMap.get(index),
+      }
+    });
+
+    return week;
   }
 
   getCurrentWeek(newMyDate) {
@@ -61,6 +88,7 @@ export class MyDate extends Date {
 
     return {
       weekStartDate: firstDate.dateOfNumber,
+      todayKey: myDate.getKey(),
       lastYear: firstDate.year,
       lastMonth: firstDate.month - 1,
       weekEndDate: endDate.dateOfNumber,
