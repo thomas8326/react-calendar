@@ -1,6 +1,7 @@
 import React from 'react';
 import { classNames } from '../utils/classNames';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 const HALF_OF_HOUR = 30;
 const ONE_HOUR = 60;
@@ -81,7 +82,7 @@ class DayViewer extends React.Component {
     return (
       <div className={this.renderClassName()}>
         <div className="dateBoard">
-          <div className="dayOfWeek textCenter fontSize-l">{dayOfWeek}</div>
+          <div className="dayOfWeek textCenter fontSize-l"><FormattedMessage id={dayOfWeek} /></div>
           <div className="date textCenter fontSize-l">{date}</div>
         </div>
         {

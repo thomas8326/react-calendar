@@ -1,12 +1,12 @@
 export class MyDate extends Date {
   dayOfWeekMap = new Map([
-    [0, 'Sun'],
-    [1, 'Mon'],
-    [2, 'Tue'],
-    [3, 'Wed'],
-    [4, 'Thu'],
-    [5, 'Fri'],
-    [6, 'Sat'],
+    [0, 'sun'],
+    [1, 'mon'],
+    [2, 'tue'],
+    [3, 'wed'],
+    [4, 'thu'],
+    [5, 'fri'],
+    [6, 'sat'],
   ]);
 
   getStringMonth() {

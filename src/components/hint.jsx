@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 const propTypes = {
   location: PropTypes.string,
@@ -11,10 +12,10 @@ function Hint() {
   return (
     <div className="hint fontSize-s">
       <div className="hintText">
-        * All the timings listed are in your timezone:
+        *<FormattedMessage id='timeZoneHint' />:
       </div>
       <div className="timezone">
-        Taipei (GMT+08:00)
+        <FormattedMessage id='taipei' /> (GMT+08:00)
       </div>
     </div>
   );
