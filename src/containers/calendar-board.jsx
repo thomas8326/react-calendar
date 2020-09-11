@@ -12,7 +12,7 @@ const propTypes = {
   fetchTeacherSchedule: PropTypes.func,
   fetchWeek: PropTypes.func,
   today: PropTypes.object,
-  week: PropTypes.array,
+  week: PropTypes.array.isRequired,
   availableTimes: PropTypes.array,
   bookedTimes: PropTypes.array,
 };
