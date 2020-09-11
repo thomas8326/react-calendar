@@ -1,0 +1,23 @@
+.fontSize-s,
+.fontSize-m,
+.fontSize-l {
+  color: var(--primary-font-color);
+  line-height: 1.5;
+}
+
+.fontSize-s {
+  font-size: 12px;
+
+}
+
+.fontSize-m {
+  font-size: 14px;
+}
+
+.fontSize-l {
+  font-size: 16px;
+}
+
+.textCenter {
+  text-align: center;
+}

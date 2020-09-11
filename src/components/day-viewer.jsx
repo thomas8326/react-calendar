@@ -1,5 +1,4 @@
 import React from 'react';
-import '../style/calendar.scss';
 import { classNames } from '../utils/classNames';
 
 const HALF_OF_HOUR = 30;

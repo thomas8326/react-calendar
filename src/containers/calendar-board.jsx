@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DayViewer from '../components/day-viewer';
-import '../style/calendar.scss';
+import '../style/pages/calendar.scss';
 import { bindActionCreators } from 'redux';
 import fetchSchedule from '../fetch/fetchSchedule';
 import { fetchWeek, getWeek, getToday } from '../redux/modules/calendar';

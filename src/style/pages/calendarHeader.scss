@@ -1,0 +1,21 @@
+@import 'src/style/utils/mixin.scss';
+
+.calendarHeader {
+  @include flex(row);
+
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hint {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: -webkit-right;
+  margin: auto 0 auto auto;
+
+  .hintText,
+  .timezone {
+    text-align: right;
+    margin: auto 0 auto auto;
+  }
+}

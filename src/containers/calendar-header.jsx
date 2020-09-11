@@ -5,7 +5,7 @@ import Hint from '../components/hint';
 import { bindActionCreators } from 'redux';
 import { goNextWeek, goLastWeek, getWeek, getToday } from '../redux/modules/calendar';
 
-import '../style/calendarHeader.scss';
+import '../style/pages/calendarHeader.scss';
 import { classNames } from '../utils/classNames';
 
 const propTypes = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../style/pagination.scss';
+import '../style/components/pagination.scss';
 import { classNames } from '../utils/classNames';
 
 const propTypes = {
