@@ -56,7 +56,6 @@ export default function calendarReducer(state = defaultState, action) {
   switch (action.type) {
 
     case FETCH_WEEK:
-      console.log(action);
       return {
         ...state,
         today: action.today,
