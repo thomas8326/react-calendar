@@ -1,5 +1,4 @@
 export class MyDate extends Date {
-  oneDaySecond = 1000 * 60 * 60 * 24
   dayOfWeekMap = new Map([
     [0, 'Sun'],
     [1, 'Mon'],
