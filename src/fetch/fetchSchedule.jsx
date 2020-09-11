@@ -1,6 +1,9 @@
 import { fetchTeacherSchedule } from '../redux/modules/teacher-schedule';
 import data from '../mock/calendar-mock.json';
 
+/*
+This folder is for all of api requests.
+*/
 export default function fetchSchedule() {
   return (dispatch) => {
     dispatch(fetchTeacherSchedule({
