@@ -6,7 +6,8 @@ const propTypes = {
   timezone: PropTypes.string,
 };
 
-function Hint({ location, timezone }) {
+// TODO: Timezone and area
+function Hint() {
   return (
     <div className="hint fontSize-s">
       <div className="hintText">
