@@ -1,4 +1,4 @@
-import { MyDate } from '../../utils/date';
+import { MyDate } from '../../entity/date';
 
 // Constants
 export const FETCH_CURRENT_WEEK = 'FETCH_CURRENT_WEEK';

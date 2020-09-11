@@ -1,4 +1,4 @@
-import { MyDate } from '../../utils/date';
+import { MyDate } from '../../entity/date';
 
 // Constants
 export const FETCH_TEACHER_SCHEDULE = 'FETCH_TEACHER_SCHEDULE';
