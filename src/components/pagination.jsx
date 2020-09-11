@@ -1,8 +1,13 @@
 import React from 'react';
 import '../style/components/pagination.scss';
 import { classNames } from '../utils/classNames';
+import PropTypes from 'prop-types';
 
 const propTypes = {
+  goLast: PropTypes.func,
+  goNext: PropTypes.func,
+  weekRange: PropTypes.string,
+  lastWeekButtonClass: PropTypes.string,
 };
 
 function Pagination({ goLast, goNext, weekRange, lastWeekButtonClass }) {

@@ -1,11 +1,18 @@
 import React from 'react';
 import { classNames } from '../utils/classNames';
+import PropTypes from 'prop-types';
 
 const HALF_OF_HOUR = 30;
 const ONE_HOUR = 60;
 const MILITARY_TIME = 24;
 
 const propTypes = {
+  availableTimes: PropTypes.array,
+  bookedTimes: PropTypes.array,
+  dateKey: PropTypes.number.isRequired,
+  todayKey: PropTypes.number.isRequired,
+  dayOfWeek: PropTypes.string,
+  date: PropTypes.string
 };
 
 class DayViewer extends React.Component {
@@ -72,7 +79,7 @@ class DayViewer extends React.Component {
     const { dayOfWeek, date } = this.props;
 
     return (
-      <div className="dayContainer" className={this.renderClassName()}>
+      <div className={this.renderClassName()}>
         <div className="dateBoard">
           <div className="dayOfWeek textCenter fontSize-l">{dayOfWeek}</div>
           <div className="date textCenter fontSize-l">{date}</div>

@@ -6,8 +6,15 @@ import { bindActionCreators } from 'redux';
 import fetchSchedule from '../fetch/fetchSchedule';
 import { fetchWeek, getWeek, getToday } from '../redux/modules/calendar';
 import { getAvailableTimes, getBookedTimes } from '../redux/modules/teacher-schedule';
+import PropTypes from 'prop-types';
 
 const propTypes = {
+  fetchTeacherSchedule: PropTypes.func,
+  fetchWeek: PropTypes.func,
+  today: PropTypes.object,
+  week: PropTypes.array,
+  availableTimes: PropTypes.array,
+  bookedTimes: PropTypes.array,
 };
 
 class Calendar extends React.Component {
@@ -17,9 +24,6 @@ class Calendar extends React.Component {
     const { fetchTeacherSchedule, fetchWeek } = this.props;
     fetchTeacherSchedule();
     fetchWeek();
-  }
-
-  UNSAFE_componentWillMount() {
   }
 
   render() {
@@ -32,7 +36,7 @@ class Calendar extends React.Component {
           <DayViewer
             key={day.fullDate.key}
             dayOfWeek={day.dayOfWeek}
-            date={day.fullDate.date}
+            date={day.fullDate.stringDate}
             dateKey={day.fullDate.key}
             todayKey={today.key}
             availableTimes={availableTimes.filter(time => time.start.fullDate.key === day.fullDate.key)}

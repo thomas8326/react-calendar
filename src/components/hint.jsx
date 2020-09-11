@@ -1,9 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const propTypes = {
+  location: PropTypes.string,
+  timezone: PropTypes.string,
 };
 
-function Hint() {
+function Hint({ location, timezone }) {
   return (
     <div className="hint fontSize-s">
       <div className="hintText">

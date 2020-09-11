@@ -7,15 +7,16 @@ import { goNextWeek, goLastWeek, getWeek, getToday } from '../redux/modules/cale
 
 import '../style/pages/calendarHeader.scss';
 import { classNames } from '../utils/classNames';
+import PropTypes from 'prop-types';
 
 const propTypes = {
+  goLastWeek: PropTypes.func,
+  goNextWeek: PropTypes.func,
+  today: PropTypes.object,
+  week: PropTypes.array,
 };
 
 class CalendarHeader extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   getCurrentWeekRange(week) {
     if (!!week.length) {
       const firstDayOfWeek = week[0];

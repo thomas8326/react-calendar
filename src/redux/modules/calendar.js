@@ -48,7 +48,7 @@ export function goNextWeek() {
 
 // Reducer
 export const defaultState = {
-  today: Date,
+  today: {},
   week: [],
 };
 
