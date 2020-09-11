@@ -28,7 +28,6 @@ class Calendar extends React.Component {
 
   render() {
     const { availableTimes, bookedTimes, week, today } = this.props;
-    console.log('In');
     return (
       <div className="calendar">
         {week.map((day) =>
